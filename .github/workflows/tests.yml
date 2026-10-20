@@ -1,0 +1,48 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The proof of gain and the HTTP parity (tests/Http) start a local Amp HTTP server on 127.0.0.1; never route
+  # them through a proxy.
+  NO_PROXY: 127.0.0.1,localhost
+
+jobs:
+  tests:
+    # The floor of the core (PHP ^8.2) and the two versions after it. No PHP extension is required; the core's
+    # HttpDataSource, used by tests/Http as the reference, needs ext-curl, which setup-php enables by default.
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: PHPUnit
+        run: vendor/bin/phpunit --no-coverage

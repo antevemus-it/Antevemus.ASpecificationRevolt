@@ -1,0 +1,7 @@
+# 🗺️ Roadmap
+
+- [x] **v1.0.0**: `RevoltDataSource` e `RevoltStageTransport`, o satélite Revolt/Fibers do marco 15b do [roadmap do ASpecification](https://github.com/antevemus-it/Antevemus.ASpecification/blob/main/ROADMAP.md), sobre o gancho `IDeferredDataSource`/`IStageTransport` do ASpecification 2.6.0: as requisições não HTTP de um estágio de resolução rodam juntas, cada closure na sua própria Fiber, com `maxConcurrency` (8 por padrão; um transporte compartilhado ou um por fonte), o limite de tempo de cada fonte, o prazo da resolução cancelando o que não terminou, e as próprias falhas do núcleo (`sourceFailed()`, `timeout()`, `resolutionTimeout()`, `DataPendingException` como está). `RevoltRunner`, o limite de concorrência com limite de tempo por tarefa, copiado do `antevemus/alinq-revolt`.
+- [ ] **Nenhuma fonte HTTP própria (fora do escopo):** uma fonte sobre o http-client do Amp duplicaria a `HttpDataSource` do núcleo, cujo lote `curl_multi` já busca HTTP de forma concorrente sem dependência e no PHP-FPM; uma closure da `RevoltDataSource` pode chamar o cliente HTTP do Amp quando os recursos dele forem necessários.
+- [ ] **Sem retentativas nem circuit breaker aqui:** pertencem ao núcleo, com o marco 16 dele, para todo tipo de fonte de uma vez; enquanto isso, uma closure pode retentar por conta própria.
+
+A visão por marcos desta lista vive no [ROADMAP.md](https://github.com/antevemus-it/Antevemus.ASpecificationRevolt/blob/main/ROADMAP.md).

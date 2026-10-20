@@ -1,0 +1,16 @@
+* text=auto eol=lf
+
+*.php text eol=lf
+*.json text eol=lf
+*.json5 text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+
+# Exclude files from export
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/tests export-ignore
+/.github export-ignore
+/phpunit.xml export-ignore
+/phpunit.xml.dist export-ignore
+/infection.json5 export-ignore

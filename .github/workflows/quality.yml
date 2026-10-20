@@ -1,0 +1,44 @@
+name: Quality
+
+# Mutation testing with Infection over the whole src/ (three classes), with the minimum scores of
+# infection.json5 (measured locally for 1.0.0, set one point below). The group "http" is left out by
+# infection.json5: it measures wall-clock time, which a parallel mutation run would disturb.
+on:
+  schedule:
+    # Mondays, 07:17 UTC.
+    - cron: '17 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NO_PROXY: 127.0.0.1,localhost
+
+jobs:
+  mutation:
+    name: Mutation testing of src/ (Infection, PHP 8.4)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: pcov
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Infection
+        run: vendor/bin/infection --threads=max --only-covering-test-cases --no-interaction --no-progress --logger-github=false
+
+      - name: Summary
+        if: always()
+        run: cat coverage/infection/summary.log || true

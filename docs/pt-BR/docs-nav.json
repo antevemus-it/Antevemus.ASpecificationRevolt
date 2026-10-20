@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "text": "Início",
+      "path": "index"
+    },
+    {
+      "text": "Primeiros passos",
+      "items": [
+        {
+          "text": "Instalação e início rápido",
+          "path": "getting-started/index"
+        }
+      ]
+    },
+    {
+      "text": "Conceitos",
+      "items": [
+        {
+          "text": "Como funciona",
+          "path": "concepts/how-it-works"
+        }
+      ]
+    },
+    {
+      "text": "Referência da API",
+      "items": [
+        {
+          "text": "RevoltDataSource e o transporte",
+          "path": "api/revolt-data-source"
+        }
+      ]
+    },
+    {
+      "text": "Qualidade",
+      "items": [
+        {
+          "text": "Testes",
+          "path": "quality/tests"
+        }
+      ]
+    },
+    {
+      "text": "Projeto",
+      "items": [
+        {
+          "text": "Roadmap",
+          "path": "project/roadmap"
+        }
+      ]
+    }
+  ]
+}

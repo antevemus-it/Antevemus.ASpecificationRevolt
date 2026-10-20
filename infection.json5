@@ -1,0 +1,41 @@
+// Mutation testing of antevemus/aspecification-revolt (1.0.0): the whole src/ (three classes). Runs in the
+// scheduled workflow (.github/workflows/quality.yml) with a coverage driver (pcov); locally:
+//
+//   XDEBUG_MODE=off vendor/bin/infection --threads=max --only-covering-test-cases \
+//       --initial-tests-php-options="-d pcov.enabled=1 -d pcov.directory=$PWD/src"
+//
+// (where Xdebug is loaded twice, with a PHP_INI_SCAN_DIR that leaves its ini out).
+// The group "http" (tests/Http: the proof of gain and the HTTP parity) is left out: it measures wall-clock time
+// against a local server, so under the parallel load of a mutation run a slow machine could "kill" a mutant by
+// a timing miss; every line of src/ is also covered by tests/Unit and tests/Property.
+//
+// Measured on 2026-10-20 (1.0.0 against ASpecification 2.6.0, Infection 0.35.8, PHP 8.4.13 with pcov): 121
+// mutants, 115 killed, 2 errors (detected), 0 time-outs, 4 escaped, all equivalent (in RevoltRunner, the same
+// three as in antevemus/alinq-revolt: a cancel() whose DeferredCancellation destructor cancels anyway, an
+// unsubscribe() of a cancellation released with the task, a finally whose catch (Throwable) already receives
+// every exception; in RevoltStageTransport, `<` turned into `<=` against the core's minimum budget, two values
+// of a monotonic clock never equal in practice); MSI 96.69%, covered-code MSI 96.69%, mutation code coverage
+// 100%. The minimum scores are one integer point below.
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": ["src"]
+    },
+    "timeout": 60,
+    "logs": {
+        "text": "coverage/infection/infection.log",
+        "summary": "coverage/infection/summary.log",
+        "json": "coverage/infection/infection.json",
+        "perMutator": "coverage/infection/per-mutator.md"
+    },
+    "tmpDir": "coverage/infection/tmp",
+    "phpUnit": {
+        "configDir": "."
+    },
+    "testFrameworkOptions": "--exclude-group=http",
+    "minMsi": 95,
+    "minCoveredMsi": 95,
+    "mutators": {
+        "@default": true
+    }
+}
