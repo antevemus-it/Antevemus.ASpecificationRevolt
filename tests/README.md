@@ -6,8 +6,8 @@ PHPUnit 11 test suite of **Antevemus ASpecification Revolt**, the Revolt/Fibers 
 
 - **Test Framework:** PHPUnit 11.5+ (PHP 8.2+), `phpunit.xml.dist` with `failOnWarning`, `failOnDeprecation` and `failOnRisky`
 - **Test Files:** 9 test classes in `tests/Unit` (6), `tests/Property` (1) and `tests/Http` (2), plus the fixtures of `tests/Support`
-- **Total Tests:** 85 tests (1.0.0)
-- **Total Assertions:** 4974 assertions, none skipped (PHP 8.4.13; the same suite passes on PHP 8.2.34)
+- **Total Tests:** 85 tests (1.0.1)
+- **Total Assertions:** 5042 assertions, none skipped (PHP 8.4.13; the same suite passes on PHP 8.2.34)
 - **Success Rate:** 100% Passing (0 failures, 0 errors, 0 deprecations)
 - **Runtime Dependencies:** `antevemus/aspecification` ^2.6, `revolt/event-loop` ^1.0, `amphp/amp` ^3.0; the tests also use `amphp/http-server` and `amphp/http-client` (require-dev) and the core's `HttpDataSource` (`ext-curl`) as the reference of the HTTP tests
 
@@ -52,7 +52,7 @@ One resolution of N leaves of `GET /item?ms=200`: callables with a blocking clie
 ### 8. `tests/Unit/DocumentationBlocksTest.php` (17 tests, 127 assertions)
 Runs the 7 PHP blocks of `docs/en` and `docs/pt-BR`, marked `<!-- tested: id -->`, and the Quick Start of each README, as written, and checks every answer in their comments; both languages carry the same blocks with the same code (comments aside) and the same answers.
 
-### 9. `tests/Unit/DocumentationTreeTest.php` (8 tests, 439 assertions)
+### 9. `tests/Unit/DocumentationTreeTest.php` (8 tests, 507 assertions)
 The guard of the documentation, adapted from `antevemus/alinq-revolt`: the same files and navigation in both languages, every link resolving, the same code token by token, the declared PHP blocks (7 per language), each README an index whose only code is the Quick Start, every PHP block tested, nothing internal leaking.
 
 ### Support

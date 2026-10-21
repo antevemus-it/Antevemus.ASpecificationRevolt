@@ -19,6 +19,10 @@ The official documentation of the package, one page per topic. The same pages ex
 
 - [RevoltDataSource and the transport](api/revolt-data-source.md): The constructor, the closure, cost and TTL, the time limit, the failures and their exceptions, `maxConcurrency`, the shared transport and the use inside a Fiber.
 
+### Internals
+
+- [Architecture](internals/architecture.md): Why Revolt and Amp and not ReactPHP, the core's hook that knows no event loop, and what a satellite for another event loop implements.
+
 ### Quality
 
 - [Tests](quality/tests.md): The PHPUnit report, the parity with the core's sources, the measured timing table and the mutation testing.

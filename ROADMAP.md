@@ -19,3 +19,6 @@ This document outlines the engineering roadmap of **Antevemus ASpecification Rev
 
 ### 3. Retries and Circuit Breaker 🧯 (In the core)
 - **Description:** Not here: they belong to the core, with its milestone 16, for every kind of source at once (HTTP, callable and deferred). Meanwhile a closure can retry on its own, inside its `timeout`.
+
+### 4. A Satellite for Another Event Loop 🔌 (Not planned)
+- **Description:** A satellite for ReactPHP (or any other event loop) would be a separate package on the same `IDeferredDataSource`/`IStageTransport` hook of the core, of the size of this one (a source, a transport and a runner), touching neither the core nor this package. It is not planned and would be built on demand: a ReactPHP application already runs this package on the same loop through the official adapter `revolt/event-loop-adapter-react`. Why this package is built on Revolt and Amp, and the contract such a package implements: [Architecture](docs/en/internals/architecture.md).

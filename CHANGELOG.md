@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-21
+
+A documentation release: a new page on the architecture of the package and the reasons behind it. No change in `src/`, in the dependencies nor in the behaviour.
+
+### Documentation
+
+- **Architecture** (`docs/en/internals/architecture.md`, `docs/pt-BR/internals/architecture.md`), a new page under a new section of the navigation, "Internals" ("Internos"), between "API reference" and "Quality". Prose only, no code block. It explains why the package is built on Revolt and Amp and not on ReactPHP (Amp 3 is built on Fibers, so the wait suspends the Fiber and the core stays synchronous, while ReactPHP's cancellation and timeouts remain the promise API; Revolt is the common loop, ReactPHP running on it through `revolt/event-loop-adapter-react`; the `Amp\Cancellation` given to the closure carries the deadline of the stage as the core's `curl_multi` batch keeps it; two small dependencies), that the core's `IDeferredDataSource`/`IStageTransport` hook knows no event loop, what a satellite for another event loop implements (the source, the transport, the rules of `fetchAll()` set by the core and the mapping of the failures to the `DataFetchException` factories), and how a ReactPHP application uses this package today.
+- **Roadmap**: a new unchecked item in `docs/*/project/roadmap.md` and a new milestone 4 in `ROADMAP.md`: a satellite for another event loop (ReactPHP, ...) is not planned; it would be a separate package on the same hook of the core, built on demand, with its contract in the Architecture page.
+- **Indexes**: the page is listed in `docs/en/index.md`, `docs/pt-BR/index.md`, `README.md` and `README.pt-BR.md`; the release badge of each README reads v1.0.1.
+
+### Notes
+
+- **Suite**: 85 tests and 5042 assertions, none skipped (PHP 8.4.13, against ASpecification 2.6.0), against 85 and 4974 in 1.0.0. The 68 new assertions are all in `DocumentationTreeTest` (439 → 507), which checks every page, navigation item and relative link, in both languages: the navigation +18 (per language, 4 checks of the new group, 4 of its item and the existence of the page: 9 × 2); the relative links +14 (3 links of the new page per language, 1 in each `index.md`, 1 in each roadmap page and 2 in each README: 14 links); the same code in both languages +2 (the fences of the new page compared and its PHP blocks counted, EN against pt-BR: none of either); the declared PHP blocks +2 (zero on the new page, one check per language); the tested blocks +4 (two checks per page and language); the internal-line guard +28 (7 checks of each new file, 14, and the 14 new links, each checked to point to a public file). The other eight classes are unchanged.
+- **Mutation testing**: not run again; `src/` did not change (121 mutants, MSI 96.69%, as in 1.0.0).
+
 ## [1.0.0] - 2026-10-20
 
 The first release: the Revolt/Fibers satellite of `antevemus/aspecification` (ASpecification), milestone 15b of the ASpecification roadmap ("Fibers/Revolt adapter for non-HTTP sources"). It requires ASpecification **2.6.0** (`^2.6`), the release that added the hook it plugs into: `IDeferredDataSource` (a source fetched by a stage transport) and `IStageTransport` (`fetchAll()` of every pending request of that transport in a stage), with the three groups of a resolution stage (the HTTP batch, then one `fetchAll()` per transport, then the other sources).

@@ -1,10 +1,10 @@
 # Antevemus ASpecification Revolt
 
 [![CI](https://github.com/antevemus-it/Antevemus.ASpecificationRevolt/actions/workflows/tests.yml/badge.svg)](https://github.com/antevemus-it/Antevemus.ASpecificationRevolt/actions/workflows/tests.yml)
-[![Latest Stable Version](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://github.com/antevemus-it/Antevemus.ASpecificationRevolt/releases)
+[![Latest Stable Version](https://img.shields.io/badge/release-v1.0.1-blue.svg)](https://github.com/antevemus-it/Antevemus.ASpecificationRevolt/releases)
 [![PHP Version](https://img.shields.io/badge/php-%5E8.2-8892BF.svg)](https://www.php.net/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests Passing](https://img.shields.io/badge/tests-85%20passed%20%7C%204974%20assertions-success.svg)](docs/pt-BR/quality/tests.md)
+[![Tests Passing](https://img.shields.io/badge/tests-85%20passed%20%7C%205042%20assertions-success.svg)](docs/pt-BR/quality/tests.md)
 [![Core: ASpecification](https://img.shields.io/badge/Core-Antevemus.ASpecification-orange)](https://github.com/antevemus-it/Antevemus.ASpecification)
 
 > **O satélite Revolt/Fibers do [ASpecification](https://github.com/antevemus-it/Antevemus.ASpecification) para PHP 8.2+**  
@@ -97,6 +97,10 @@ Uma `RevoltDataSource` só ganha com o cliente não bloqueante (as colunas do Am
 
 - [RevoltDataSource e o transporte](docs/pt-BR/api/revolt-data-source.md) · [en](docs/en/api/revolt-data-source.md): O construtor, a closure, custo e TTL, o limite de tempo, as falhas e as suas exceções, o `maxConcurrency`, o transporte compartilhado e o uso dentro de uma Fiber.
 
+**Internos**
+
+- [Arquitetura](docs/pt-BR/internals/architecture.md) · [en](docs/en/internals/architecture.md): Por que Revolt e Amp e não ReactPHP, o gancho do núcleo que não conhece event loop, e o que um satélite para outro event loop implementa.
+
 **Qualidade**
 
 - [Testes](docs/pt-BR/quality/tests.md) · [en](docs/en/quality/tests.md): O relatório do PHPUnit, a paridade com as fontes do núcleo, a tabela de tempos medida e o teste de mutação.
@@ -109,7 +113,7 @@ Uma `RevoltDataSource` só ganha com o cliente não bloqueante (as colunas do Am
 
 ## 🧪 Qualidade
 
-- **Testes:** 85 testes PHPUnit (`vendor/bin/phpunit`) e 4974 asserções, 100% passando no PHP 8.4 (e na 8.2; a CI roda 8.2, 8.3 e 8.4): a fonte, o transporte e o runner, a paridade com as fontes do núcleo, propriedades sobre árvores aleatórias, a prova de ganho contra um servidor HTTP local, e os blocos de código da documentação.
+- **Testes:** 85 testes PHPUnit (`vendor/bin/phpunit`) e 5042 asserções, 100% passando no PHP 8.4 (e na 8.2; a CI roda 8.2, 8.3 e 8.4): a fonte, o transporte e o runner, a paridade com as fontes do núcleo, propriedades sobre árvores aleatórias, a prova de ganho contra um servidor HTTP local, e os blocos de código da documentação.
 - **Paridade:** as mesmas árvores dão os mesmos vereditos, erros de avaliação, requisições falhas, classes de exceção e nomes de fonte por `CallableDataSource`, `HttpDataSource` e `RevoltDataSource` (150 comparações com a fonte callable sob as três políticas, 52 contra o servidor local).
 - **Propriedades:** 300 árvores aleatórias semeadas sobre fontes Revolt em 1 a 3 transportes misturadas com fontes callable: os mesmos vereditos que por fontes callable, sob toda política; cada requisição buscada uma vez; cada transporte chamado no máximo uma vez por estágio.
 - **Teste de mutação:** Infection sobre todo o `src/`, MSI 96,69% (4 mutantes escapados, todos equivalentes); o workflow de Qualidade exige 95%.

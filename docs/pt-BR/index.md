@@ -19,6 +19,10 @@ A documentação oficial do pacote, uma página por tópico. As mesmas páginas 
 
 - [RevoltDataSource e o transporte](api/revolt-data-source.md): O construtor, a closure, custo e TTL, o limite de tempo, as falhas e as suas exceções, o `maxConcurrency`, o transporte compartilhado e o uso dentro de uma Fiber.
 
+### Internos
+
+- [Arquitetura](internals/architecture.md): Por que Revolt e Amp e não ReactPHP, o gancho do núcleo que não conhece event loop, e o que um satélite para outro event loop implementa.
+
 ### Qualidade
 
 - [Testes](quality/tests.md): O relatório do PHPUnit, a paridade com as fontes do núcleo, a tabela de tempos medida e o teste de mutação.

@@ -32,6 +32,15 @@
       ]
     },
     {
+      "text": "Internos",
+      "items": [
+        {
+          "text": "Arquitetura",
+          "path": "internals/architecture"
+        }
+      ]
+    },
+    {
       "text": "Qualidade",
       "items": [
         {
